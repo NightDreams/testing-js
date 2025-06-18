@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:verbose": "jest --verbose",
     "eslint": "npx eslint src/** --cache  ",
     "eslint:fix": "eslint src/** --fix --cache"
