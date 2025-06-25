@@ -1,10 +1,5 @@
-const BooksService = require('./books.service.js');
-
-const fakeBooks = [
-  { id: '1', name: 'Hunger Games', author: 'George Orwell' },
-  { id: '2', name: 'To Kill a Mockingbird', author: 'Harper Lee' },
-  { id: '3', name: 'The Great Gatsby', author: 'F. Scott Fitzgerald' },
-];
+const { generateManyBooks } = require('../fakes/book.fake');
+const BooksService = require('./books.service');
 
 const mockGetAll = jest.fn();
 // .mockReturnValue(fakeBooks);
@@ -21,30 +16,30 @@ describe('Test for BooksService', () => {
   });
 
   describe('test for getBooks', () => {
-    test('should return an list of books', async () => {
+    test('getBooks(spy): call getBooks and get a book list', async () => {
       // arrange
-      mockGetAll.mockResolvedValue(fakeBooks);
+      const fakebooks = generateManyBooks(3);
+      mockGetAll.mockResolvedValue(fakebooks);
       // act
       const books = await service.getBooks({});
-      // console.log(books);
       // assert
-      expect(books.length).toEqual(3);
+      console.log('🚀 ~ test ~ books:', books);
+      expect(books.length).toEqual(fakebooks.length);
       expect(mockGetAll).toHaveBeenCalled();
       expect(mockGetAll).toHaveBeenCalledTimes(1);
       expect(mockGetAll).toHaveBeenCalledWith('books', {});
     });
+
     test('should return an list of books', async () => {
       // arrange
-      mockGetAll.mockResolvedValue([{
-        _id: '1',
-        name: 'Hunger Games 2',
-        author: 'George Orwell',
-      }]);
+      const fakebooks = generateManyBooks(5);
+
+      mockGetAll.mockResolvedValue(fakebooks);
       // act
       const books = await service.getBooks({});
       console.log(books);
       // assert
-      expect(books[0].name).toEqual('Hunger Games 2');
+      expect(books[0].name).toEqual(fakebooks[0].name);
     });
   });
 });
