@@ -40,7 +40,9 @@ class MongoLib {
 
   async update(collection, id, data) {
     const db = await this.connect();
-    await db.collection(collection).updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true });
+    await db
+      .collection(collection)
+      .updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true });
     return this.get(collection, id);
   }
 
