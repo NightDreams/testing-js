@@ -4,15 +4,15 @@ const BooksService = require('./books.service');
 const mockGetAll = jest.fn();
 // .mockReturnValue(fakeBooks);
 
-jest.mock('../lib/mongo.lib.js', () => jest.fn().mockImplementation(
-  () => ({ getAll: mockGetAll, create: () => {} }),
-));
+jest.mock('../lib/mongo.lib.js', () =>
+  jest.fn().mockImplementation(() => ({ getAll: mockGetAll, create: () => {} })),
+);
 
 describe('Test for BooksService', () => {
   let service;
   beforeEach(() => {
     service = new BooksService();
-    // jest.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('test for getBooks', () => {
