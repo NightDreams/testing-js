@@ -3,6 +3,8 @@ import globals from 'globals';
 import json from '@eslint/json';
 import css from '@eslint/css';
 import { defineConfig } from 'eslint/config';
+import { jest, pluginJest } from 'eslint-plugin-jest';
+
 //plugins
 import importPlugin from 'eslint-plugin-import';
 const commonPlugins = { js, import: importPlugin };
@@ -10,6 +12,7 @@ const commonExtends = ['js/recommended'];
 const commonLanguageOptions = {
   ecmaVersion: 2021,
   globals: { ...globals.node, ...globals.browser, ...globals.jest },
+  env,
 };
 
 const commonRules = {
@@ -71,5 +74,15 @@ export default defineConfig([
     plugins: { css },
     language: 'css/css',
     extends: ['css/recommended'],
+  },
+  {
+    files: ['**/*.spec.js', '**/*.test.js', '**/*.e2e.{js,mjs,cjs}'],
+    plugins: { jest: pluginJest },
+    languageOptions: {
+      globals: pluginJest.environments.globals.globals,
+    },
+    rules: {
+      ...jest.configs.recommended.rules,
+    },
   },
 ]);
