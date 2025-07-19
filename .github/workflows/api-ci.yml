@@ -46,3 +46,35 @@ jobs:
       - name: run unit test
         shell: bash
         run: npm run test
+  e2e:
+    runs-on: ubuntu-latest
+    env: # <-- aquí se definen envs para todo el job
+      MONGO_DB_NAME: demo
+      MONGO_E2E_USERNAME: ${{ secrets.MONGO_E2E_USERNAME }}
+      MONGO_E2E_PASSWORD: ${{ secrets.MONGO_E2E_PASSWORD }}
+      MONGO_URL: mongodb://${{ secrets.MONGO_E2E_USERNAME }}:${{ secrets.MONGO_E2E_PASSWORD }}@localhost:27017
+
+    container:
+      image: node:22
+
+    services:
+      mongo-e2e:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: ${{ env.MONGO_E2E_USERNAME }}
+          MONGO_INITDB_ROOT_PASSWORD: ${{ env.MONGO_E2E_PASSWORD }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: install
+        shell: bash
+        run: npm ci
+      - name: run e2e
+        shell: bash
+        run: npm run test:e2e
+        env:
+          MONGO_DB_NAME: demo
+          MONGO_URL: ${{env.MONGO_URL}}
