@@ -1,7 +1,11 @@
 {
-  "moduleFileExtensions": ["js"],
-  "rootDir": ".",
+  "preset": "jest",
   "testEnvironment": "node",
-  "testRegex": ".e2e.js$",
-  "testRunner": "jest-circus/runner"
+  "rootDir": "../",
+  "testRegex": ".*\\.e2e\\.js$",
+  "moduleFileExtensions": ["js", "json"],
+  "testRunner": "jest-circus/runner",
+  "verbose": true,
+  "collectCoverage": false,
+  "clearMocks": true
 }
