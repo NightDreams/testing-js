@@ -15,7 +15,7 @@ const commonLanguageOptions = {
 };
 
 const commonRules = {
-  'no-unused-vars': 'off', // 🔥 Desactiva la regla que impide commits con vars sin uso
+  'no-unused-vars': 'warn', // 🔥 Desactiva la regla que impide commits con vars sin uso
   quotes: ['error', 'single'],
   'import/no-extraneous-dependencies': [
     'error',
