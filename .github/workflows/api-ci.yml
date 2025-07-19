@@ -12,6 +12,23 @@ defaults:
     working-directory: ./api
 
 jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+          cache-dependency-path: ./api/package-lock.json
+      - name: install
+        shell: bash
+        run: npm ci
+      - name: run linter
+        shell: bash
+        run: npm run lint
   unit-test:
     runs-on: ubuntu-latest
     steps:
