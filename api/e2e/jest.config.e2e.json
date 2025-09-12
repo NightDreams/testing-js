@@ -1,6 +1,8 @@
 {
-  "moduleFileExtensions": ["js"],
-  "rootDir": ".",
+  "rootDir": "../",
+  "testMatch": ["<rootDir>/e2e/**/*.e2e.js"],
   "testEnvironment": "node",
-  "testRegex": ".e2e.js$"
+  "moduleFileExtensions": ["js", "json"],
+  "verbose": true,
+  "clearMocks": true
 }
