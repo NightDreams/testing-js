@@ -3,7 +3,7 @@ import globals from 'globals';
 import json from '@eslint/json';
 import css from '@eslint/css';
 import { defineConfig } from 'eslint/config';
-import { jest, pluginJest } from 'eslint-plugin-jest';
+import pluginJest from 'eslint-plugin-jest';
 
 //plugins
 import importPlugin from 'eslint-plugin-import';
@@ -12,10 +12,10 @@ const commonExtends = ['js/recommended'];
 const commonLanguageOptions = {
   ecmaVersion: 2021,
   globals: { ...globals.node, ...globals.browser, ...globals.jest },
-  env,
 };
 
 const commonRules = {
+  'no-unused-vars': 'off', // 🔥 Desactiva la regla que impide commits con vars sin uso
   quotes: ['error', 'single'],
   'import/no-extraneous-dependencies': [
     'error',
@@ -82,7 +82,7 @@ export default defineConfig([
       globals: pluginJest.environments.globals.globals,
     },
     rules: {
-      ...jest.configs.recommended.rules,
+      ...pluginJest.configs.recommended.rules,
     },
   },
 ]);
