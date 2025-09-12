@@ -1,17 +1,11 @@
 const request = require('supertest');
-
 const createApp = require('../src/app');
 
 describe('Test for hello endpoint', () => {
   let app = null;
-  let server = null;
-  beforeAll(() => {
-    app = createApp();
-    server = app.listen(3001);
-  });
 
-  afterAll(async () => {
-    await server.close();
+  beforeAll(() => {
+    app = createApp(); // ✅ sin listen
   });
 
   describe('test for [GET] /', () => {
