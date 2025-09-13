@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "start:dev": "DEBUG=app:* nodemon src/index.js",
+    "start:dev": "nodemon src/index.js",
     "start:prod": "NODE_ENV=production node src/index.js",
     "test": "jest",
     "lint": "eslint src/** --max-warnings=0",
@@ -13,7 +13,7 @@
     "test:e2e": "jest --config ./e2e/jest.config.e2e.json",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "docker:up": "docker-compose up -d mongotest",
-    "docker:down": "doc,ker-compose stop mongotest && docker-compose rm -f mongotest",
+    "docker:down": "docker-compose stop mongotest && docker-compose rm -f mongotest",
     "test:e2e:ci": "npm run docker:up && npm run test:e2e && npm run docker:down"
   },
   "keywords": [],
