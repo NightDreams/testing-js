@@ -18,6 +18,8 @@ describe('Test for books', () => {
     app = createApp();
   });
 
+  afterAll;
+
   describe('test for [GET] /api/v1/books', () => {
     test('should return a list books', () => {
       // Arrange
