@@ -6,23 +6,21 @@ const { config } = require('../src/config');
 const DB_NAME = config.dbName;
 const MONGO_URI = config.dbUrl;
 
-describe('BookService: Test for books ', () => {
+describe('BookService: Test for books', () => {
   let app = null;
-  let server = null;
   let database = null;
-  let client = null; // Mantenemos el cliente a nivel de la suite
+  let client = null;
 
   beforeAll(async () => {
-    app = createApp();
-    server = app.listen(3001);
-    const client = new MongoClient(MONGO_URI, {});
+    app = createApp(); // ❌ sin listen
+    client = new MongoClient(MONGO_URI);
     await client.connect();
     database = client.db(DB_NAME);
   });
 
   afterAll(async () => {
-    await server.close();
     await database.dropDatabase();
+    await client.close(true); // ✅ cerrar conexión
   });
 
   describe('test(bookService): [integration|mock] GET /api/v1/books', () => {
