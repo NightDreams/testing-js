@@ -10,7 +10,7 @@
     "test": "jest",
     "lint": "eslint src/** --max-warnings=0",
     "lint:fix": "eslint src/** --fix",
-    "test:e2e": "jest --config ./e2e/jest.config.e2e.json",
+    "test:e2e": "jest --detectOpenHandles --config ./e2e/jest.config.e2e.json",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "docker:up": "docker-compose up -d mongotest",
     "docker:down": "docker-compose stop mongotest && docker-compose rm -f mongotest",
